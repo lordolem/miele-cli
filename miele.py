@@ -65,9 +65,9 @@ for machine in machines:
     text2 = machine['Text2']
     
     if machineSymbol == 0:
-        machineType=f"{bcolors.BGPURPLE}Washer${bcolors.ENDC}"
+        machineType=f"{bcolors.BGPURPLE}Washer{bcolors.ENDC}"
     else:
-        machineType=f"{bcolors.BGCYAN}Dyrer${bcolors.ENDC}"
+        machineType=f"{bcolors.BGCYAN}Dyrer{bcolors.ENDC}"
 
     if machineColor == 2:
         print(f"{bcolors.WARNING}{unitName}{bcolors.ENDC} {machineType}: {bcolors.WARNING}{text1}{text2}{bcolors.ENDC}")
