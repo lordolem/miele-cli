@@ -5,7 +5,7 @@ A program that uses the Miele Logic API (kind, uses curl idk) to check the progr
 The authentication header in the curl command is not included, because I don't know if that is a security risk or not. Better safe than sorry.
 
 ## Example output
-![Example of output](/miele-example.png)
+![Example of output](/assets/miele-example.png)
 
 ## Usage
 

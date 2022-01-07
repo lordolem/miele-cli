@@ -2,6 +2,7 @@
 
 import requests
 import sys
+import tokens
 
 class bcolors:
     HEADER = '\033[4m'
@@ -19,7 +20,7 @@ class bcolors:
 headers = {
     'Connection': 'keep-alive',
     'Accept': 'application/json, text/plain, */*',
-    'Authorization': '',
+    'Authorization': f'{tokens.auth}',
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36',
     'Sec-GPC': '1',
     'Origin': 'https://mielelogic.com',
@@ -41,7 +42,7 @@ def get_data(bulding_id):
         url_id = "9127"
     else:
         url_id = "9127"
-    
+
     response = requests.get(f'https://api.mielelogic.com/v3/Country/NO/Laundry/{url_id}/laundrystates', headers=headers, params=params)
     data = response.json()
     machines = [i for i in data['MachineStates']]
@@ -63,7 +64,7 @@ for machine in machines:
     machineColor = machine['MachineColor']
     text1 = machine['Text1']
     text2 = machine['Text2']
-    
+
     if machineSymbol == 0:
         machineType=f"{bcolors.BGPURPLE}Washer{bcolors.ENDC}"
     else:
@@ -73,4 +74,4 @@ for machine in machines:
         print(f"{bcolors.WARNING}{unitName}{bcolors.ENDC} {machineType}: {bcolors.WARNING}{text1}{text2}{bcolors.ENDC}")
     else:
         print(f"{bcolors.OKGREEN}{unitName}{bcolors.ENDC} {machineType}: {bcolors.OKGREEN}{text1}{text2}{bcolors.ENDC}")
-        
+
