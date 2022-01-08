@@ -18,17 +18,7 @@ class bcolors:
     ENDC = '\033[0m'
 
 headers = {
-    'Connection': 'keep-alive',
-    'Accept': 'application/json, text/plain, */*',
     'Authorization': f'{tokens.auth}',
-    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36',
-    'Sec-GPC': '1',
-    'Origin': 'https://mielelogic.com',
-    'Sec-Fetch-Site': 'same-site',
-    'Sec-Fetch-Mode': 'cors',
-    'Sec-Fetch-Dest': 'empty',
-    'Referer': 'https://mielelogic.com/',
-    'Accept-Language': 'en-US,en;q=0.9',
 }
 
 params = (

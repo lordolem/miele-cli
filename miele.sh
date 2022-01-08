@@ -25,17 +25,7 @@ function getLaundryState() {
   fi
 
   laundryState=$(curl "https://api.mielelogic.com/v3/Country/NO/Laundry/$ID/laundrystates?language=en" \
-  -H 'Connection: keep-alive' \
-  -H 'Accept: application/json, text/plain, */*' \
   -H 'Authorization: ' \
-  -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36' \
-  -H 'Sec-GPC: 1' \
-  -H 'Origin: https://mielelogic.com' \
-  -H 'Sec-Fetch-Site: same-site' \
-  -H 'Sec-Fetch-Mode: cors' \
-  -H 'Sec-Fetch-Dest: empty' \
-  -H 'Referer: https://mielelogic.com/' \
-  -H 'Accept-Language: en-US,en;q=0.9' \
   --compressed -s)
 
   length=$(echo "$laundryState" | jq ".MachineStates" | jq "length")
