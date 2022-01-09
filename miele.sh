@@ -26,6 +26,7 @@ function getLaundryState() {
 
   laundryState=$(curl "https://api.mielelogic.com/v3/Country/NO/Laundry/$ID/laundrystates?language=en" \
   -H 'Authorization: ' \
+  -H 'User-Agent: github.com/lordolem/miele-cli' \
   --compressed -s)
 
   length=$(echo "$laundryState" | jq ".MachineStates" | jq "length")

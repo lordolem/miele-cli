@@ -1,4 +1,5 @@
 #!/usr/bin/python
+#-*- coding: utf-8 -*-
 
 import requests
 import sys
@@ -18,6 +19,7 @@ class bcolors:
     ENDC = '\033[0m'
 
 headers = {
+    'User-Agent': 'github.com/lordolem/miele-cli',
     'Authorization': f'{tokens.auth}',
 }
 
