@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
-FILE=$HOME/.local/bin/miele
 OS=`uname`
 
 if [[ $OS == "Darwin" ]]; then
-    FILE=/usr/bin/miele
+    FILE=/usr/local/bin/miele
 elif [[ $OS == "Linux" ]]; then
   FILE=$HOME/.local/bin/miele
 else

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 #-*- coding: utf-8 -*-
 
 import requests
@@ -20,14 +20,33 @@ class bcolors:
 
 headers = {
     'User-Agent': 'github.com/lordolem/miele-cli',
-    'Authorization': f'{tokens.auth}',
+    'Authorization': tokens.auth,
 }
 
 params = (
     ('language', 'en'),
 )
 
-def get_data(bulding_id):
+def pretty_data(machines, building_id):
+    print(f"{bcolors.HEADER}-- Grønneviksøren {building_id} --{bcolors.ENDC}")
+    for machine in machines:
+        unitName = machine['UnitName']
+        machineSymbol = machine['MachineSymbol']
+        machineColor = machine['MachineColor']
+        text1 = machine['Text1']
+        text2 = machine['Text2']
+
+        if machineSymbol == 0:
+            machineType=f"{bcolors.BGPURPLE}Washer{bcolors.ENDC}"
+        else:
+            machineType=f"{bcolors.BGCYAN}Dyrer{bcolors.ENDC}"
+
+        if machineColor == 2:
+            print(f"{bcolors.WARNING}{unitName}{bcolors.ENDC} {machineType}: {bcolors.WARNING}{text1}{text2}{bcolors.ENDC}")
+        else:
+            print(f"{bcolors.OKGREEN}{unitName}{bcolors.ENDC} {machineType}: {bcolors.OKGREEN}{text1}{text2}{bcolors.ENDC}")
+    
+def main(bulding_id):
     if bulding_id == "52":
         url_id = "9126"
     elif bulding_id == "54":
@@ -35,35 +54,19 @@ def get_data(bulding_id):
     else:
         url_id = "9127"
 
-    response = requests.get(f'https://api.mielelogic.com/v3/Country/NO/Laundry/{url_id}/laundrystates', headers=headers, params=params)
-    data = response.json()
-    machines = [i for i in data['MachineStates']]
-
-    return machines
+    response = requests.get('https://api.mielelogic.com/v3/Country/NO/Laundry/' + url_id + '/laundrystates', headers=headers, params=params)
+    
+    # Check reponse status code
+    if response.status_code == 200:
+        data = response.json()
+        machines = [i for i in data['MachineStates']]
+        return pretty_data(machines, bulding_id)
+    else:
+        print(f"{bcolors.FAIL}-- Status code: {response.status_code} --{bcolors.ENDC}")
 
 try:
-    machines = get_data(sys.argv[1])
+    machines = main(sys.argv[1])
     building = sys.argv[1]
 except IndexError:
-    machines = get_data(54)
+    machines = main(54)
     building = "54"
-
-print(f"{bcolors.HEADER}-- Grønneviksøren {building} --{bcolors.ENDC}")
-
-for machine in machines:
-    unitName = machine['UnitName']
-    machineSymbol = machine['MachineSymbol']
-    machineColor = machine['MachineColor']
-    text1 = machine['Text1']
-    text2 = machine['Text2']
-
-    if machineSymbol == 0:
-        machineType=f"{bcolors.BGPURPLE}Washer{bcolors.ENDC}"
-    else:
-        machineType=f"{bcolors.BGCYAN}Dyrer{bcolors.ENDC}"
-
-    if machineColor == 2:
-        print(f"{bcolors.WARNING}{unitName}{bcolors.ENDC} {machineType}: {bcolors.WARNING}{text1}{text2}{bcolors.ENDC}")
-    else:
-        print(f"{bcolors.OKGREEN}{unitName}{bcolors.ENDC} {machineType}: {bcolors.OKGREEN}{text1}{text2}{bcolors.ENDC}")
-
