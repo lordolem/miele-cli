@@ -1,5 +1,4 @@
-#!/usr/bin/python3
-#-*- coding: utf-8 -*-
+#!/usr/bin/env python3
 
 import requests
 import sys
@@ -45,7 +44,7 @@ def pretty_data(machines, building_id):
             print(f"{bcolors.WARNING}{unitName}{bcolors.ENDC} {machineType}: {bcolors.WARNING}{text1}{text2}{bcolors.ENDC}")
         else:
             print(f"{bcolors.OKGREEN}{unitName}{bcolors.ENDC} {machineType}: {bcolors.OKGREEN}{text1}{text2}{bcolors.ENDC}")
-    
+
 def main(bulding_id):
     if bulding_id == "52":
         url_id = "9126"
@@ -55,7 +54,7 @@ def main(bulding_id):
         url_id = "9127"
 
     response = requests.get('https://api.mielelogic.com/v3/Country/NO/Laundry/' + url_id + '/laundrystates', headers=headers, params=params)
-    
+
     # Check reponse status code
     if response.status_code == 200:
         data = response.json()
