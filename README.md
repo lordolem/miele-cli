@@ -1,10 +1,9 @@
 # Miele-cli
 
-A program that uses the Miele Logic API (kind, uses curl idk) to check the progress of the dryers and washers at my student complex. 
-
-The authentication header in the curl command is not included, because I don't know if that is a security risk or not. Better safe than sorry.
+Program that uses the Miele Logic API to check the status/progress of dryers and washers at my student housing. You need your account token for this program to work.
 
 ## Example output
+
 ![Example of output](/assets/miele-example.png)
 
 ## Usage
@@ -13,4 +12,7 @@ You can use `miele` to get the status of Grønneviksøren 54, the default. Or us
 
 Included is a .py and .sh. The bash script depends on [jq](https://github.com/stedolan/jq). JQ can be download through you package manager.
 
-Feedback is very much appreciated. :)
+This project is dead. My student housing now uses Miele appWash. I have made two projects related to appWash.
+
+- [Appwash CLI (Python)](https://github.com/omfj/appwash-cli)
+- [Appwash rust (Rust)](https://github.com/omfj/appwash-rs)

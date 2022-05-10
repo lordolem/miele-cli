@@ -4,6 +4,7 @@ import requests
 import sys
 import tokens
 
+
 class bcolors:
     HEADER = '\033[4m'
     OKBLUE = '\033[94m'
@@ -17,6 +18,7 @@ class bcolors:
     BGCYAN = '\033[44m'
     ENDC = '\033[0m'
 
+
 headers = {
     'User-Agent': 'github.com/lordolem/miele-cli',
     'Authorization': tokens.auth,
@@ -25,6 +27,7 @@ headers = {
 params = (
     ('language', 'en'),
 )
+
 
 def pretty_data(machines, building_id):
     print(f"{bcolors.HEADER}-- Grønneviksøren {building_id} --{bcolors.ENDC}")
@@ -36,24 +39,26 @@ def pretty_data(machines, building_id):
         text2 = machine['Text2']
 
         if machineSymbol == 0:
-            machineType=f"{bcolors.BGPURPLE}Washer{bcolors.ENDC}"
+            machineType = f"{bcolors.BGPURPLE}Washer{bcolors.ENDC}"
         else:
-            machineType=f"{bcolors.BGCYAN}Dyrer{bcolors.ENDC}"
+            machineType = f"{bcolors.BGCYAN}Dyrer{bcolors.ENDC}"
 
         if machineColor == 2:
-            print(f"{bcolors.WARNING}{unitName}{bcolors.ENDC} {machineType}: {bcolors.WARNING}{text1}{text2}{bcolors.ENDC}")
+            print(
+                f"{bcolors.WARNING}{unitName}{bcolors.ENDC} {machineType}: {bcolors.WARNING}{text1}{text2}{bcolors.ENDC}")
         else:
-            print(f"{bcolors.OKGREEN}{unitName}{bcolors.ENDC} {machineType}: {bcolors.OKGREEN}{text1}{text2}{bcolors.ENDC}")
+            print(
+                f"{bcolors.OKGREEN}{unitName}{bcolors.ENDC} {machineType}: {bcolors.OKGREEN}{text1}{text2}{bcolors.ENDC}")
+
 
 def main(bulding_id):
+    url_id = "9127"
+
     if bulding_id == "52":
         url_id = "9126"
-    elif bulding_id == "54":
-        url_id = "9127"
-    else:
-        url_id = "9127"
 
-    response = requests.get('https://api.mielelogic.com/v3/Country/NO/Laundry/' + url_id + '/laundrystates', headers=headers, params=params)
+    response = requests.get('https://api.mielelogic.com/v3/Country/NO/Laundry/' +
+                            url_id + '/laundrystates', headers=headers, params=params)
 
     # Check reponse status code
     if response.status_code == 200:
@@ -62,6 +67,7 @@ def main(bulding_id):
         return pretty_data(machines, bulding_id)
     else:
         print(f"{bcolors.FAIL}-- Status code: {response.status_code} --{bcolors.ENDC}")
+
 
 try:
     machines = main(sys.argv[1])

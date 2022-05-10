@@ -14,7 +14,6 @@ BG_CYAN="\e[106m"
 BG_GRAY="\e[100m"
 
 NC="\e[0m"
-###########
 
 function getLaundryState() {
 
@@ -60,17 +59,17 @@ case "$1" in
     ;;
   "52")
     echo -e "${FG_GREEN}-- Grønneviksøren $1 --${NC}"
-    getLaundryState 52 | column -t -s "-" 
+    getLaundryState 52 | column -t -s "-"
     exit 0
     ;;
   "54")
     echo -e "${FG_GREEN}-- Grønneviksøren $1 --${NC}"
-    getLaundryState 54 | column -t -s "-" 
+    getLaundryState 54 | column -t -s "-"
     exit 0
     ;;
   *)
     echo -e "${FG_GREEN}-- Grønneviksøren 54 --${NC}"
-    getLaundryState 54 | column -t -s "-" 
+    getLaundryState 54 | column -t -s "-"
     exit 0
     ;;
 esac
